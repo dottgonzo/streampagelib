@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "./node_modules/.bin/tsc && ./node_modules/.bin/browserify import.js > dist/streampagelib.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/dottgonzo/streampagelib/issues"
   },
-  "homepage": "https://github.com/dottgonzo/streampagelib#readme"
+  "homepage": "https://github.com/dottgonzo/streampagelib#readme",
+  "devDependencies": {
+    "browserify": "^14.4.0",
+    "typescript": "^2.4.2"
+  }
 }
