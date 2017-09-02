@@ -1,34 +1,38 @@
 <!DOCTYPE html>
-<html lang="it"> 
- <meta charset="utf-8">
+<html lang="it">
+<meta charset="utf-8">
 <!-- <link rel="shortcut icon" href="logo.gif" > -->
 <title></title>
 
-<head> 
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>TEST</title>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TEST</title>
 
 
 </head>
-  <body>
+
+<body>
 
 
-    <h1> Test </h1>
+  <h1> Test </h1>
 
- 
-test here
-<div id="videotest"></div>
-end test
 
-<script src="/dist/streampagelib.js"></script> 
+  test here
+  <div id="videotest"></div>
+  end test
 
-<script>
-drawPlayer()
+  <script src="/dist/streampagelib.js"></script>
+
+  <script>
+    var options = {
+      uri: 'http://vjs.zencdn.net/v/oceans.mp4',
+      el: 'videotest' // default is videojs
+    }
+
+    drawPlayer(options)
   </script>
 
 
-  </body> 
+</body>
 
-</html> 
-
-
+</html>
