@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var $ = require("jquery");
 var videojs = require("video.js");
 var fileinfo = require("filenameinfo");
+require('videojs-contrib-hls');
 var defaultOptions = {
     el: 'videojs'
 };

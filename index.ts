@@ -3,7 +3,7 @@ import * as $ from 'jquery'
 import * as videojs from 'video.js'
 import * as fileinfo from 'filenameinfo'
 
-
+require('videojs-contrib-hls')
 
 
 export interface IConfigOptions {
@@ -55,7 +55,7 @@ export function drawPlayer(options: IConfigOptions) {
 
 
         $('#' + videoid).css('height', ($('#' + videoid).width() * this.videoHeight()) / this.videoWidth() + 'px')
-        
+
     })
 
 
