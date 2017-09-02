@@ -19,7 +19,10 @@
     "index*",
     "bower_components",
     "test",
-    "package.json",
+    "tsconfig.json",
+    "typings.json",
+    "index.html",
+    "package*",
     "src"
   ]
 }
