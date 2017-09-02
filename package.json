@@ -20,5 +20,9 @@
   "devDependencies": {
     "browserify": "^14.4.0",
     "typescript": "^2.4.2"
+  },
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "video.js": "^6.2.7"
   }
 }
