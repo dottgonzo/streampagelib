@@ -9,5 +9,17 @@
   "keywords": [
     "hls"
   ],
-  "homepage": "https://github.com/dottgonzo/streampagelib"
+  "homepage": "https://github.com/dottgonzo/streampagelib",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "css",
+    "typings",
+    "./import*",
+    "./index*",
+    "bower_components",
+    "test",
+    "package.json",
+    "src"
+  ]
 }
