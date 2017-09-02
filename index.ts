@@ -1,9 +1,8 @@
 
-import * as $ from 'jquery'
 import * as videojs from 'video.js'
 import * as fileinfo from 'filenameinfo'
 
-require('videojs-contrib-hls')
+const contrib = require('videojs-contrib-hls')
 
 
 export interface IConfigOptions {
@@ -31,20 +30,20 @@ export function drawPlayer(options: IConfigOptions) {
 
     const videoid = opt.el + '_vid'
 
-    const playerhtml = $('#' + opt.el)
+    const playerhtml = document.getElementById(opt.el)
 
     const sourceType = fileinfo.filenameinfo(options.uri).contentType
 
     const videoSourceNode = '<source src="' + options.uri + '" type="' + sourceType + '">'
 
     let player
-
-    if (playerhtml.html()) {
-        playerhtml.html('<video style="width:100%" class="video-js" id="' + videoid + '" controls preload="auto" data-setup="{}">' + videoSourceNode + '</video>')
+    if (!playerhtml) throw Error('no html node finded')
+    if (playerhtml.innerHTML) {
+        playerhtml.innerHTML = '<video style="width:100%" class="video-js" id="' + videoid + '" controls preload="auto" data-setup="{}">' + videoSourceNode + '</video>'
         videojs(videoid).dispose()
         player = videojs(videoid)
     } else {
-        playerhtml.html('<video style="width:100%" class="video-js" id="' + videoid + '" controls preload="auto" data-setup="{}">' + videoSourceNode + '</video>')
+        playerhtml.innerHTML = '<video style="width:100%" class="video-js" id="' + videoid + '" controls preload="auto" data-setup="{}">' + videoSourceNode + '</video>'
         player = videojs(videoid)
     }
 
@@ -54,7 +53,7 @@ export function drawPlayer(options: IConfigOptions) {
     player.on('loadedmetadata', function () {
 
 
-        $('#' + videoid).css('height', ($('#' + videoid).width() * this.videoHeight()) / this.videoWidth() + 'px')
+        document.getElementById(videoid).style.height = (document.getElementById(videoid).offsetWidth * player.videoHeight()) / player.videoWidth() + 'px';
 
     })
 

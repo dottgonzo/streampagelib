@@ -24,7 +24,6 @@
   },
   "dependencies": {
     "filenameinfo": "0.0.6",
-    "jquery": "^3.2.1",
     "video.js": "^6.2.7",
     "videojs-contrib-hls": "^5.10.1"
   }
