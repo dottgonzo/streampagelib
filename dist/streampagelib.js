@@ -36,11 +36,16 @@ function drawPlayer(options) {
         throw Error('no html node finded');
     if (playerhtml.innerHTML) {
         playerhtml.innerHTML = '<video style="width:100%" class="video-js" id="' + videoid + '" controls preload="auto" data-setup="{}">' + videoSourceNode + '</video>';
+        var videoheight169 = ((document.getElementById(videoid).offsetWidth / 16) * 9) + 'px';
+        document.getElementById(videoid).style.height = videoheight169;
         videojs(videoid).dispose();
         player = videojs(videoid);
     }
     else {
         playerhtml.innerHTML = '<video style="width:100%" class="video-js" id="' + videoid + '" controls preload="auto" data-setup="{}">' + videoSourceNode + '</video>';
+        var videoheight169 = ((document.getElementById(videoid)
+            .offsetWidth / 16) * 9) + 'px';
+        document.getElementById(videoid).style.height = videoheight169;
         player = videojs(videoid);
     }
     player.on('loadedmetadata', function () {
