@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "./node_modules/.bin/tsc && ./node_modules/.bin/browserify -t cssify import.js > dist/streampagelib.js"
+    "build": "./node_modules/.bin/tsc && ./node_modules/.bin/browserify -t cssify import.js > dist/streampagelib.js",
+    "dev": "./node_modules/.bin/autoreload-server ."
   },
   "repository": {
     "type": "git",
@@ -20,6 +21,7 @@
   "devDependencies": {
     "browserify": "^14.4.0",
     "cssify": "^1.0.3",
+    "simple-autoreload-server": "^0.2.7",
     "typescript": "^2.4.2"
   },
   "dependencies": {

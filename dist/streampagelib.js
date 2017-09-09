@@ -43,13 +43,13 @@ function drawPlayer(options) {
     }
     else {
         playerhtml.innerHTML = '<video style="width:100%" class="video-js" id="' + videoid + '" controls preload="auto" data-setup="{}">' + videoSourceNode + '</video>';
-        var videoheight169 = ((document.getElementById(videoid)
+        var videoheight169 = ((document.getElementById(options.el)
             .offsetWidth / 16) * 9) + 'px';
-        document.getElementById(videoid).style.height = videoheight169;
+        document.getElementById(options.el).style.height = videoheight169;
         player = videojs(videoid);
     }
     player.on('loadedmetadata', function () {
-        document.getElementById(videoid).style.height = (document.getElementById(videoid).offsetWidth * player.videoHeight()) / player.videoWidth() + 'px';
+        document.getElementById(options.el).style.height = (document.getElementById(options.el).offsetWidth * player.videoHeight()) / player.videoWidth() + 'px';
     });
 }
 exports.drawPlayer = drawPlayer;
