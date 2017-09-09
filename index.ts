@@ -50,12 +50,16 @@ export function drawPlayer(options: IConfigOptions) {
     } else {
         playerhtml.innerHTML = '<video style="width:100%;height:100%" class="video-js" id="' + videoid + '" controls preload="auto" data-setup="{}">' + videoSourceNode + '</video>'
         const videoheight169 = ((document.getElementById(opt.el)
-        .offsetWidth / 16) * 9) + 'px'
+            .offsetWidth / 16) * 9) + 'px'
         document.getElementById(opt.el).style.height = videoheight169
         player = videojs(videoid)
     }
 
-
+    window.onresize = function (event) {
+        const videoheight169 = ((document.getElementById(opt.el)
+            .offsetWidth / 16) * 9) + 'px'
+        document.getElementById(opt.el).style.height = videoheight169
+    }
 
     player.on('loadedmetadata', function () {
 

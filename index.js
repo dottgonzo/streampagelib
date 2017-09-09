@@ -34,6 +34,11 @@ function drawPlayer(options) {
         document.getElementById(opt.el).style.height = videoheight169;
         player = videojs(videoid);
     }
+    window.onresize = function (event) {
+        var videoheight169 = ((document.getElementById(opt.el)
+            .offsetWidth / 16) * 9) + 'px';
+        document.getElementById(opt.el).style.height = videoheight169;
+    };
     player.on('loadedmetadata', function () {
         document.getElementById(opt.el).style.height = (document.getElementById(opt.el).offsetWidth * player.videoHeight()) / player.videoWidth() + 'px';
     });
