@@ -39,16 +39,19 @@ export function drawPlayer(options: IConfigOptions) {
     let player
     if (!playerhtml) throw Error('no html node finded')
     if (playerhtml.innerHTML) {
-        playerhtml.innerHTML = '<video style="width:100%" class="video-js" id="' + videoid + '" controls preload="auto" data-setup="{}">' + videoSourceNode + '</video>'
-        const videoheight169 = ((document.getElementById(videoid).offsetWidth / 16) * 9) + 'px'
-        document.getElementById(videoid).style.height = videoheight169
+
+        playerhtml.innerHTML = '<video style="width:100%; eight:100%" class="video-js" id="' + videoid + '" controls preload="auto" data-setup="{}">' + videoSourceNode + '</video>'
+
+        const videoheight169 = ((document.getElementById(opt.el).offsetWidth / 16) * 9) + 'px'
+
+        document.getElementById(opt.el).style.height = videoheight169
         videojs(videoid).dispose()
         player = videojs(videoid)
     } else {
-        playerhtml.innerHTML = '<video style="width:100%" class="video-js" id="' + videoid + '" controls preload="auto" data-setup="{}">' + videoSourceNode + '</video>'
-        const videoheight169 = ((document.getElementById(options.el)
+        playerhtml.innerHTML = '<video style="width:100%;height:100%" class="video-js" id="' + videoid + '" controls preload="auto" data-setup="{}">' + videoSourceNode + '</video>'
+        const videoheight169 = ((document.getElementById(opt.el)
         .offsetWidth / 16) * 9) + 'px'
-        document.getElementById(options.el).style.height = videoheight169
+        document.getElementById(opt.el).style.height = videoheight169
         player = videojs(videoid)
     }
 
@@ -57,7 +60,7 @@ export function drawPlayer(options: IConfigOptions) {
     player.on('loadedmetadata', function () {
 
 
-        document.getElementById(options.el).style.height = (document.getElementById(options.el).offsetWidth * player.videoHeight()) / player.videoWidth() + 'px';
+        document.getElementById(opt.el).style.height = (document.getElementById(opt.el).offsetWidth * player.videoHeight()) / player.videoWidth() + 'px';
 
     })
 
