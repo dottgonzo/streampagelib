@@ -21,6 +21,7 @@ var defaultOptions = {
     el: 'videojs'
 };
 function drawPlayer(options) {
+    console.log(options);
     if (!options.uri)
         throw Error('no uri specified');
     var opt = {
@@ -35,7 +36,7 @@ function drawPlayer(options) {
     if (!playerhtml)
         throw Error('no html node finded');
     if (playerhtml.innerHTML) {
-        playerhtml.innerHTML = '<video style="width:100%; eight:100%" class="video-js" id="' + videoid + '" controls preload="auto" data-setup="{}">' + videoSourceNode + '</video>';
+        playerhtml.innerHTML = '<video style="width:100%; height:100%" class="video-js" id="' + videoid + '" controls preload="auto" data-setup="{}">' + videoSourceNode + '</video>';
         var videodim = void 0;
         if (options && options.ratio43) {
             videodim = ((document.getElementById(opt.el).offsetWidth / 4) * 3) + 'px';

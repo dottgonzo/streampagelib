@@ -8,7 +8,7 @@ const contrib = require('videojs-contrib-hls')
 export interface IConfigOptions {
     el?: string
     uri: string
-    ratio43?:string
+    ratio43?: string
 }
 
 export interface IOptions {
@@ -21,7 +21,7 @@ const defaultOptions = {
 }
 
 export function drawPlayer(options: IConfigOptions) {
-
+console.log(options)
     if (!options.uri) throw Error('no uri specified')
 
     const opt: IOptions = {
@@ -41,18 +41,15 @@ export function drawPlayer(options: IConfigOptions) {
     if (!playerhtml) throw Error('no html node finded')
     if (playerhtml.innerHTML) {
 
-        playerhtml.innerHTML = '<video style="width:100%; eight:100%" class="video-js" id="' + videoid + '" controls preload="auto" data-setup="{}">' + videoSourceNode + '</video>'
+        playerhtml.innerHTML = '<video style="width:100%; height:100%" class="video-js" id="' + videoid + '" controls preload="auto" data-setup="{}">' + videoSourceNode + '</video>'
 
-let videodim
+        let videodim
 
-if (options&&options.ratio43){
-    videodim = ((document.getElementById(opt.el).offsetWidth / 4) * 3) + 'px'
-} else {
-    videodim = ((document.getElementById(opt.el).offsetWidth / 16) * 9) + 'px'
-}
-
-
-
+        if (options && options.ratio43) {
+            videodim = ((document.getElementById(opt.el).offsetWidth / 4) * 3) + 'px'
+        } else {
+            videodim = ((document.getElementById(opt.el).offsetWidth / 16) * 9) + 'px'
+        }
 
 
         document.getElementById(opt.el).style.height = videodim
@@ -60,21 +57,22 @@ if (options&&options.ratio43){
         player = videojs(videoid)
     } else {
         playerhtml.innerHTML = '<video style="width:100%;height:100%" class="video-js" id="' + videoid + '" controls preload="auto" data-setup="{}">' + videoSourceNode + '</video>'
-     
+
         let videodim
-        
-        if (options&&options.ratio43){
+
+        if (options && options.ratio43) {
+           
             videodim = ((document.getElementById(opt.el)
-            .offsetWidth / 4) * 3) + 'px'
+                .offsetWidth / 4) * 3) + 'px'
         } else {
             videodim = ((document.getElementById(opt.el)
-            .offsetWidth / 16) * 9) + 'px'
+                .offsetWidth / 16) * 9) + 'px'
         }
 
 
 
 
-        
+
 
         document.getElementById(opt.el).style.height = videodim
         player = videojs(videoid)
@@ -83,13 +81,13 @@ if (options&&options.ratio43){
     window.onresize = function (event) {
 
         let videodim
-        
-        if (options&&options.ratio43){
+
+        if (options && options.ratio43) {
             videodim = ((document.getElementById(opt.el)
-            .offsetWidth / 4) * 3) + 'px'
+                .offsetWidth / 4) * 3) + 'px'
         } else {
             videodim = ((document.getElementById(opt.el)
-            .offsetWidth / 16) * 9) + 'px'
+                .offsetWidth / 16) * 9) + 'px'
         }
 
 
