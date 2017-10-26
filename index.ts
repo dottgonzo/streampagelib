@@ -8,6 +8,7 @@ const contrib = require('videojs-contrib-hls')
 export interface IConfigOptions {
     el?: string
     uri: string
+    ratio43?:string
 }
 
 export interface IOptions {
@@ -42,23 +43,59 @@ export function drawPlayer(options: IConfigOptions) {
 
         playerhtml.innerHTML = '<video style="width:100%; eight:100%" class="video-js" id="' + videoid + '" controls preload="auto" data-setup="{}">' + videoSourceNode + '</video>'
 
-        const videoheight169 = ((document.getElementById(opt.el).offsetWidth / 16) * 9) + 'px'
+let videodim
 
-        document.getElementById(opt.el).style.height = videoheight169
+if (options&&options.ratio43){
+    videodim = ((document.getElementById(opt.el).offsetWidth / 4) * 3) + 'px'
+} else {
+    videodim = ((document.getElementById(opt.el).offsetWidth / 16) * 9) + 'px'
+}
+
+
+
+
+
+        document.getElementById(opt.el).style.height = videodim
         videojs(videoid).dispose()
         player = videojs(videoid)
     } else {
         playerhtml.innerHTML = '<video style="width:100%;height:100%" class="video-js" id="' + videoid + '" controls preload="auto" data-setup="{}">' + videoSourceNode + '</video>'
-        const videoheight169 = ((document.getElementById(opt.el)
+     
+        let videodim
+        
+        if (options&&options.ratio43){
+            videodim = ((document.getElementById(opt.el)
+            .offsetWidth / 4) * 3) + 'px'
+        } else {
+            videodim = ((document.getElementById(opt.el)
             .offsetWidth / 16) * 9) + 'px'
-        document.getElementById(opt.el).style.height = videoheight169
+        }
+
+
+
+
+        
+
+        document.getElementById(opt.el).style.height = videodim
         player = videojs(videoid)
     }
 
     window.onresize = function (event) {
-        const videoheight169 = ((document.getElementById(opt.el)
+
+        let videodim
+        
+        if (options&&options.ratio43){
+            videodim = ((document.getElementById(opt.el)
+            .offsetWidth / 4) * 3) + 'px'
+        } else {
+            videodim = ((document.getElementById(opt.el)
             .offsetWidth / 16) * 9) + 'px'
-        document.getElementById(opt.el).style.height = videoheight169
+        }
+
+
+
+
+        document.getElementById(opt.el).style.height = videodim
     }
 
     player.on('loadedmetadata', function () {

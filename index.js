@@ -22,22 +22,42 @@ function drawPlayer(options) {
         throw Error('no html node finded');
     if (playerhtml.innerHTML) {
         playerhtml.innerHTML = '<video style="width:100%; eight:100%" class="video-js" id="' + videoid + '" controls preload="auto" data-setup="{}">' + videoSourceNode + '</video>';
-        var videoheight169 = ((document.getElementById(opt.el).offsetWidth / 16) * 9) + 'px';
-        document.getElementById(opt.el).style.height = videoheight169;
+        var videodim = void 0;
+        if (options && options.ratio43) {
+            videodim = ((document.getElementById(opt.el).offsetWidth / 4) * 3) + 'px';
+        }
+        else {
+            videodim = ((document.getElementById(opt.el).offsetWidth / 16) * 9) + 'px';
+        }
+        document.getElementById(opt.el).style.height = videodim;
         videojs(videoid).dispose();
         player = videojs(videoid);
     }
     else {
         playerhtml.innerHTML = '<video style="width:100%;height:100%" class="video-js" id="' + videoid + '" controls preload="auto" data-setup="{}">' + videoSourceNode + '</video>';
-        var videoheight169 = ((document.getElementById(opt.el)
-            .offsetWidth / 16) * 9) + 'px';
-        document.getElementById(opt.el).style.height = videoheight169;
+        var videodim = void 0;
+        if (options && options.ratio43) {
+            videodim = ((document.getElementById(opt.el)
+                .offsetWidth / 4) * 3) + 'px';
+        }
+        else {
+            videodim = ((document.getElementById(opt.el)
+                .offsetWidth / 16) * 9) + 'px';
+        }
+        document.getElementById(opt.el).style.height = videodim;
         player = videojs(videoid);
     }
     window.onresize = function (event) {
-        var videoheight169 = ((document.getElementById(opt.el)
-            .offsetWidth / 16) * 9) + 'px';
-        document.getElementById(opt.el).style.height = videoheight169;
+        var videodim;
+        if (options && options.ratio43) {
+            videodim = ((document.getElementById(opt.el)
+                .offsetWidth / 4) * 3) + 'px';
+        }
+        else {
+            videodim = ((document.getElementById(opt.el)
+                .offsetWidth / 16) * 9) + 'px';
+        }
+        document.getElementById(opt.el).style.height = videodim;
     };
     player.on('loadedmetadata', function () {
         document.getElementById(opt.el).style.height = (document.getElementById(opt.el).offsetWidth * player.videoHeight()) / player.videoWidth() + 'px';
