@@ -1,0 +1,34 @@
+{
+  "name": "streampagelib",
+  "version": "0.0.17",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "./node_modules/.bin/tsc && ./node_modules/.bin/browserify -t cssify import.js > dist/streampagelib.js",
+    "dev": "./node_modules/.bin/autoreload-server ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dottgonzo/streampagelib.git"
+  },
+  "author": "Dario Caruso",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/dottgonzo/streampagelib/issues"
+  },
+  "homepage": "https://github.com/dottgonzo/streampagelib#readme",
+  "devDependencies": {
+    "browserify": "^14.4.0",
+    "cssify": "^1.0.3",
+    "simple-autoreload-server": "^0.2.7",
+    "typescript": "^2.4.2"
+  },
+  "dependencies": {
+    "filenameinfo": "0.0.6",
+    "modernizr": "^3.5.0",
+    "swfobject": "^2.2.1",
+    "video.js": "^6.2.7",
+    "videojs-contrib-hls": "^5.10.1"
+  }
+}

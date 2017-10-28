@@ -1,0 +1,29 @@
+{
+  "name": "streampagelib",
+  "description": "Videojs + hls contrib module",
+  "main": "dist/streampagelib.js",
+  "authors": [
+    "Dario Caruso"
+  ],
+  "license": "Apache-2.0",
+  "keywords": [
+    "hls"
+  ],
+  "homepage": "https://github.com/dottgonzo/streampagelib",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "css",
+    "typings",
+    "import*",
+    "index*",
+    "bower_components",
+    "test",
+    "tsconfig.json",
+    "typings.json",
+    "*.html",
+    "package*",
+    "*.swf",
+    "src"
+  ]
+}

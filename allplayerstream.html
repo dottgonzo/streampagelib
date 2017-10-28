@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="it">
+<meta charset="utf-8">
+<!-- <link rel="shortcut icon" href="logo.gif" > -->
+<title>
+  test
+</title>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+</head>
+
+<body style="margin:0px">
+  <div id="videotest"></div>
+
+
+  <script src="/dist/streampagelib.js"></script>
+
+
+  <script>
+
+var player=new StreamPlayer({
+      hlsURI: 'https://stream034.be-on.tv/hls/test.m3u8',
+      rtmpURI: 'rtmp://stream034.be-on.tv:1935/live/test',
+      el: 'videotest', // default is videojs
+      ratio43: true,
+      swfLib:'./GrindPlayer.swf'
+    })
+    player.drawPlayer()
+  </script>
+
+
+</body>
+
+</html>
