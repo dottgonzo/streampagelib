@@ -23,7 +23,6 @@
     "typings.json",
     "*.html",
     "package*",
-    "*.swf",
     "src"
   ]
 }
