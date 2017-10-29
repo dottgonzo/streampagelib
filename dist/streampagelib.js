@@ -35,7 +35,9 @@ var StreamPlayer = (function () {
             var opt = {
                 uri: conf.hlsURI,
                 el: conf.el,
-                ratio43: conf.ratio43
+                ratio43: conf.ratio43,
+                poster: conf.poster,
+                autoplay: conf.autoplay
             };
             return drawHLSPlayer(opt);
         }
@@ -62,7 +64,9 @@ var StreamPlayer = (function () {
                 uri: conf.rtmpURI,
                 swfLib: conf.swfLib,
                 el: conf.el,
-                ratio43: conf.ratio43
+                ratio43: conf.ratio43,
+                poster: conf.poster,
+                autoplay: conf.autoplay
             };
             return drawFLASHPlayer(opt);
         }
@@ -80,7 +84,9 @@ function SPlayer(options) {
         swfLib: options.swfLib || './GrindPlayer.swf',
         ratio43: options.ratio43,
         el: options.el,
-        disableFallback: options.disableFallback
+        disableFallback: options.disableFallback,
+        autoplay: options.autoplay,
+        poster: options.poster
     };
     if (!options.hlsAppUri)
         options.hlsAppUri = 'hls';
@@ -116,12 +122,15 @@ function detectPlayer() {
 exports.detectPlayer = detectPlayer;
 function drawFLASHPlayer(options) {
     var flashvars = {
-        src: options.uri
+        src: options.uri,
+        autoPlay: false
     };
+    if (options.autoplay)
+        flashvars.autoPlay = true;
     var params = {
         allowFullScreen: true,
         allowScriptAccess: "always",
-        bgcolor: "#000000"
+        bgcolor: "#000000",
     };
     var attrs = {
         name: "player"
@@ -168,8 +177,7 @@ function drawHLSPlayer(options) {
     if (!options.uri)
         throw Error('no uri specified');
     var opt = {
-        el: options.el || defaultHtmlTag,
-        uri: options.uri
+        el: options.el || defaultHtmlTag
     };
     var videoid = opt.el + '_vid';
     var playerhtml = document.getElementById(opt.el);
@@ -179,7 +187,12 @@ function drawHLSPlayer(options) {
     if (!playerhtml)
         throw Error('no html node finded');
     if (playerhtml.innerHTML) {
-        playerhtml.innerHTML = '<video style="width:100%; height:100%" class="video-js" id="' + videoid + '" controls preload="auto" data-setup="{}">' + videoSourceNode + '</video>';
+        if (options.poster) {
+            playerhtml.innerHTML = '<video style="width:100%; height:100%" class="video-js" id="' + videoid + '" controls preload="auto" data-setup=\'{"poster":"' + options.poster + '"}\'>' + videoSourceNode + '</video>';
+        }
+        else {
+            playerhtml.innerHTML = '<video style="width:100%; height:100%" class="video-js" id="' + videoid + '" controls preload="auto" data-setup=\'{}\'>' + videoSourceNode + '</video>';
+        }
         var videodim = void 0;
         if (options && options.ratio43) {
             videodim = ((document.getElementById(opt.el).offsetWidth / 4) * 3) + 'px';
@@ -192,7 +205,12 @@ function drawHLSPlayer(options) {
         player = videojs(videoid);
     }
     else {
-        playerhtml.innerHTML = '<video style="width:100%;height:100%" class="video-js" id="' + videoid + '" controls preload="auto" data-setup="{}">' + videoSourceNode + '</video>';
+        if (options.poster) {
+            playerhtml.innerHTML = '<video style="width:100%;height:100%" class="video-js" id="' + videoid + '" controls preload="auto" data-setup=\'{"poster":"' + options.poster + '"}\'>' + videoSourceNode + '</video>';
+        }
+        else {
+            playerhtml.innerHTML = '<video style="width:100%;height:100%" class="video-js" id="' + videoid + '" controls preload="auto" data-setup=\'{}\'>' + videoSourceNode + '</video>';
+        }
         var videodim = void 0;
         if (options && options.ratio43) {
             videodim = ((document.getElementById(opt.el)
@@ -220,6 +238,11 @@ function drawHLSPlayer(options) {
     player.on('loadedmetadata', function () {
         document.getElementById(opt.el).style.height = (document.getElementById(opt.el).offsetWidth * player.videoHeight()) / player.videoWidth() + 'px';
     });
+    if (options.autoplay) {
+        setTimeout(function () {
+            player.play();
+        }, 500);
+    }
 }
 exports.drawHLSPlayer = drawHLSPlayer;
 

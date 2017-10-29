@@ -11,6 +11,7 @@ export interface IHLSConfigOptions {
   uri: string
   ratio43?: boolean
   autoplay?: boolean
+  poster?: string
 }
 
 export interface IRTMPConfigOptions {
@@ -18,7 +19,8 @@ export interface IRTMPConfigOptions {
   uri: string
   swfLib?: string
   ratio43?: boolean
-  autoplay?: boolean  
+  autoplay?: boolean
+  poster?:string
 }
 
 
@@ -30,6 +32,8 @@ export interface IStreamPlayerOptions {
   rtmpURI?: string
   disableFallback?: boolean
   ratio43?: boolean
+  poster?: string
+  autoplay?: boolean
 }
 
 
@@ -61,7 +65,9 @@ export class StreamPlayer {
       const opt = {
         uri: conf.hlsURI,
         el: conf.el,
-        ratio43: conf.ratio43
+        ratio43: conf.ratio43,
+        poster: conf.poster,
+        autoplay: conf.autoplay
       }
 
       return drawHLSPlayer(opt)
@@ -91,7 +97,9 @@ export class StreamPlayer {
         uri: conf.rtmpURI,
         swfLib: conf.swfLib,
         el: conf.el,
-        ratio43: conf.ratio43
+        ratio43: conf.ratio43,
+        poster: conf.poster,
+        autoplay: conf.autoplay
       }
 
       return drawFLASHPlayer(opt)
@@ -116,6 +124,7 @@ export interface IBeontvPlayerConf {
   el?: string
   disableFallback?: boolean
   autoplay?: boolean
+  poster?: string
 }
 export function SPlayer(options: IBeontvPlayerConf) {
   if (!options || !options.channel || !options.hostname) throw Error('invalid bplayer conf')
@@ -124,7 +133,8 @@ export function SPlayer(options: IBeontvPlayerConf) {
     ratio43: options.ratio43,
     el: options.el,
     disableFallback: options.disableFallback,
-    autoplay: options.autoplay
+    autoplay: options.autoplay,
+    poster: options.poster
   }
 
 
@@ -173,14 +183,18 @@ export function detectPlayer(): boolean {
 
 export function drawFLASHPlayer(options: IRTMPConfigOptions) {
 
-
   const flashvars = {
-    src: options.uri
+    src: options.uri,
+    autoPlay: false
   }
+
+
+  if (options.autoplay) flashvars.autoPlay = true
+
   const params = {
     allowFullScreen: true,
     allowScriptAccess: "always",
-    bgcolor: "#000000"
+    bgcolor: "#000000",
   }
   const attrs = {
     name: "player"
@@ -201,6 +215,27 @@ export function drawFLASHPlayer(options: IRTMPConfigOptions) {
     ratioV0 = 9
   }
   let videodim
+
+// if(options.poster){
+//   const newdiv = document.createElement('div')
+//   newdiv.innerHTML='<a id="swfocover" style="display:block;height:100%;width:100%;display:block" href="javascript:flstreamplay()"><div style="background-image:url(\''+options.poster+'\');width:100%;height:100%;background-size:cover;background-position:50% 50%;"></div></a><div id="swfo" style="display:none;width:100%;height:100%"></div>'
+//   newdiv.style.height='100%'
+//   newdiv.style.width='100%'
+  
+//   document.getElementById(options.el).appendChild(newdiv)
+
+
+//   window['flstreamplay']=function(){
+    
+//     document.getElementById("swfocover").remove()
+//     document.getElementById("swfo").style.display='block'
+    
+//   }
+
+
+// }
+
+
   if (window.innerHeight < window.innerWidth) {
     videodim = ((document.getElementById(options.el).offsetWidth / ratioH0) * ratioV0) + 'px'
 
@@ -234,18 +269,24 @@ export function drawFLASHPlayer(options: IRTMPConfigOptions) {
 
     document.getElementById(options.el).style.height = videodim
 
-
+    // if(!options.poster){
+      
+    // swfobject.embedSWF(options.swfLib, options.el, document.getElementById(options.el).offsetWidth, document.getElementById(options.el).offsetHeight, "10.2", null, flashvars, params, attrs);
+    // } else {
+    //   swfobject.embedSWF(options.swfLib, "swfo", document.getElementById(options.el).offsetWidth, document.getElementById(options.el).offsetHeight, "10.2", null, flashvars, params, attrs);
+      
+    // }
     swfobject.embedSWF(options.swfLib, options.el, document.getElementById(options.el).offsetWidth, document.getElementById(options.el).offsetHeight, "10.2", null, flashvars, params, attrs);
-
-
   }
+  // if(!options.poster){
+    
+  // swfobject.embedSWF(options.swfLib, options.el, document.getElementById(options.el).offsetWidth, document.getElementById(options.el).offsetHeight, "10.2", null, flashvars, params, attrs);
 
-
+  // }  else {
+  //   swfobject.embedSWF(options.swfLib, "swfo", document.getElementById(options.el).offsetWidth, document.getElementById(options.el).offsetHeight, "10.2", null, flashvars, params, attrs);
+    
+  // }
   swfobject.embedSWF(options.swfLib, options.el, document.getElementById(options.el).offsetWidth, document.getElementById(options.el).offsetHeight, "10.2", null, flashvars, params, attrs);
-
-
-
-
 
 }
 
@@ -256,9 +297,7 @@ export function drawHLSPlayer(options: IHLSConfigOptions) {
   if (!options.uri) throw Error('no uri specified')
 
   const opt = {
-    el: options.el || defaultHtmlTag,
-    uri: options.uri,
-    autoplay: options.autoplay
+    el: options.el || defaultHtmlTag
   }
 
   const videoid = opt.el + '_vid'
@@ -269,12 +308,20 @@ export function drawHLSPlayer(options: IHLSConfigOptions) {
 
   const videoSourceNode = '<source src="' + options.uri + '" type="' + sourceType + '">'
 
+
+
+
   let player
   if (!playerhtml) throw Error('no html node finded')
   if (playerhtml.innerHTML) {
 
-    playerhtml.innerHTML = '<video style="width:100%; height:100%" class="video-js" id="' + videoid + '" controls preload="auto" data-setup="{}">' + videoSourceNode + '</video>'
 
+    if (options.poster) {
+      playerhtml.innerHTML = '<video style="width:100%; height:100%" class="video-js" id="' + videoid + '" controls preload="auto" data-setup=\'{"poster":"' + options.poster + '"}\'>' + videoSourceNode + '</video>'
+    } else {
+      playerhtml.innerHTML = '<video style="width:100%; height:100%" class="video-js" id="' + videoid + '" controls preload="auto" data-setup=\'{}\'>' + videoSourceNode + '</video>'
+
+    }
     let videodim
 
     if (options && options.ratio43) {
@@ -288,7 +335,15 @@ export function drawHLSPlayer(options: IHLSConfigOptions) {
     videojs(videoid).dispose()
     player = videojs(videoid)
   } else {
-    playerhtml.innerHTML = '<video style="width:100%;height:100%" class="video-js" id="' + videoid + '" controls preload="auto" data-setup="{}">' + videoSourceNode + '</video>'
+
+    if (options.poster) {
+      playerhtml.innerHTML = '<video style="width:100%;height:100%" class="video-js" id="' + videoid + '" controls preload="auto" data-setup=\'{"poster":"' + options.poster + '"}\'>' + videoSourceNode + '</video>'
+
+    } else {
+      playerhtml.innerHTML = '<video style="width:100%;height:100%" class="video-js" id="' + videoid + '" controls preload="auto" data-setup=\'{}\'>' + videoSourceNode + '</video>'
+
+    }
+
 
     let videodim
 
@@ -333,7 +388,16 @@ export function drawHLSPlayer(options: IHLSConfigOptions) {
 
     document.getElementById(opt.el).style.height = (document.getElementById(opt.el).offsetWidth * player.videoHeight()) / player.videoWidth() + 'px';
 
+
+
+
   })
+  if (options.autoplay) {
+    setTimeout(() => {
+      player.play()
+
+    }, 500)
+  }
 
 
 }
