@@ -188,7 +188,7 @@ export function drawFLASHPlayer(options: IRTMPConfigOptions) {
   }
 
 
-  if (options.autoplay) flashvars.autoPlay = true
+  if (!options.autoplay) flashvars.autoPlay = false
 
   const params = {
     allowFullScreen: true,
