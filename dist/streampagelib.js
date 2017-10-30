@@ -167,9 +167,9 @@ function drawFLASHPlayer(options) {
                 .offsetWidth / 16) * 9) + 'px';
         }
         document.getElementById(options.el).style.height = videodim;
-        swfobject.embedSWF(options.swfLib, options.el, "100%", "100%", "10.2", null, flashvars, params, attrs);
+        swfobject.embedSWF(options.swfLib, options.el, document.getElementById(options.el).offsetWidth, document.getElementById(options.el).offsetHeight, "10.2", null, flashvars, params, attrs);
     };
-    swfobject.embedSWF(options.swfLib, options.el, "100%", "100%", "10.2", null, flashvars, params, attrs);
+    swfobject.embedSWF(options.swfLib, options.el, document.getElementById(options.el).offsetWidth, document.getElementById(options.el).offsetHeight, "10.2", null, flashvars, params, attrs);
 }
 exports.drawFLASHPlayer = drawFLASHPlayer;
 function drawHLSPlayer(options) {
