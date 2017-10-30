@@ -183,9 +183,8 @@ export function detectPlayer(): boolean {
 
 export function drawFLASHPlayer(options: IRTMPConfigOptions) {
 
-  const flashvars = {
-    src: options.uri,
-    autoPlay: false
+  const flashvars:any = {
+    src: options.uri
   }
 
 

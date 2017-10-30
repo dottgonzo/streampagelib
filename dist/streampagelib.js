@@ -122,8 +122,7 @@ function detectPlayer() {
 exports.detectPlayer = detectPlayer;
 function drawFLASHPlayer(options) {
     var flashvars = {
-        src: options.uri,
-        autoPlay: false
+        src: options.uri
     };
     if (options.autoplay)
         flashvars.autoPlay = true;
