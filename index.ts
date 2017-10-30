@@ -20,7 +20,7 @@ export interface IRTMPConfigOptions {
   swfLib?: string
   ratio43?: boolean
   autoplay?: boolean
-  poster?:string
+  poster?: string
 }
 
 
@@ -169,7 +169,7 @@ export function detectPlayer(): boolean {
   if (testEl.canPlayType) {
 
     // Check for h264 support
-    if (testEl.canPlayType && testEl.canPlayType('video/mp4; codecs="avc1.42E01E"') && testEl.canPlayType('video/mp4; codecs="avc1.42E01E, mp4a.40.2"') && !(window.navigator.userAgent.indexOf('MSIE ') > -1) && !(window.navigator.userAgent.indexOf('Trident/') > -1)) {
+    if (testEl.canPlayType && testEl.canPlayType('video/mp4; codecs="avc1.42E01E"') && testEl.canPlayType('video/mp4; codecs="avc1.42E01E, mp4a.40.2"') && !(window.navigator.userAgent.indexOf('MSIE ') > -1) && !(window.navigator.userAgent.indexOf('Trident/') > -1) && !(window.navigator.userAgent.indexOf('SMART-TV/')  > -1 && window.navigator.userAgent.indexOf('Kit/')  > -1 && parseInt(window.navigator.userAgent.split('Kit/')[1].split('.')[0]) < 536)) {
       return true
     }
 
@@ -216,24 +216,24 @@ export function drawFLASHPlayer(options: IRTMPConfigOptions) {
   }
   let videodim
 
-// if(options.poster){
-//   const newdiv = document.createElement('div')
-//   newdiv.innerHTML='<a id="swfocover" style="display:block;height:100%;width:100%;display:block" href="javascript:flstreamplay()"><div style="background-image:url(\''+options.poster+'\');width:100%;height:100%;background-size:cover;background-position:50% 50%;"></div></a><div id="swfo" style="display:none;width:100%;height:100%"></div>'
-//   newdiv.style.height='100%'
-//   newdiv.style.width='100%'
-  
-//   document.getElementById(options.el).appendChild(newdiv)
+  // if(options.poster){
+  //   const newdiv = document.createElement('div')
+  //   newdiv.innerHTML='<a id="swfocover" style="display:block;height:100%;width:100%;display:block" href="javascript:flstreamplay()"><div style="background-image:url(\''+options.poster+'\');width:100%;height:100%;background-size:cover;background-position:50% 50%;"></div></a><div id="swfo" style="display:none;width:100%;height:100%"></div>'
+  //   newdiv.style.height='100%'
+  //   newdiv.style.width='100%'
+
+  //   document.getElementById(options.el).appendChild(newdiv)
 
 
-//   window['flstreamplay']=function(){
-    
-//     document.getElementById("swfocover").remove()
-//     document.getElementById("swfo").style.display='block'
-    
-//   }
+  //   window['flstreamplay']=function(){
+
+  //     document.getElementById("swfocover").remove()
+  //     document.getElementById("swfo").style.display='block'
+
+  //   }
 
 
-// }
+  // }
 
 
   if (window.innerHeight < window.innerWidth) {
@@ -270,23 +270,23 @@ export function drawFLASHPlayer(options: IRTMPConfigOptions) {
     document.getElementById(options.el).style.height = videodim
 
     // if(!options.poster){
-      
+
     // swfobject.embedSWF(options.swfLib, options.el, document.getElementById(options.el).offsetWidth, document.getElementById(options.el).offsetHeight, "10.2", null, flashvars, params, attrs);
     // } else {
     //   swfobject.embedSWF(options.swfLib, "swfo", document.getElementById(options.el).offsetWidth, document.getElementById(options.el).offsetHeight, "10.2", null, flashvars, params, attrs);
-      
+
     // }
-    swfobject.embedSWF(options.swfLib, options.el, document.getElementById(options.el).offsetWidth, document.getElementById(options.el).offsetHeight, "10.2", null, flashvars, params, attrs);
+    swfobject.embedSWF(options.swfLib, options.el, "100%", "100%", "10.2", null, flashvars, params, attrs);
   }
   // if(!options.poster){
-    
+
   // swfobject.embedSWF(options.swfLib, options.el, document.getElementById(options.el).offsetWidth, document.getElementById(options.el).offsetHeight, "10.2", null, flashvars, params, attrs);
 
   // }  else {
   //   swfobject.embedSWF(options.swfLib, "swfo", document.getElementById(options.el).offsetWidth, document.getElementById(options.el).offsetHeight, "10.2", null, flashvars, params, attrs);
-    
+
   // }
-  swfobject.embedSWF(options.swfLib, options.el, document.getElementById(options.el).offsetWidth, document.getElementById(options.el).offsetHeight, "10.2", null, flashvars, params, attrs);
+  swfobject.embedSWF(options.swfLib, options.el, "100%", "100%", "10.2", null, flashvars, params, attrs);
 
 }
 

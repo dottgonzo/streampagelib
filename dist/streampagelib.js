@@ -113,7 +113,7 @@ exports.SPlayer = SPlayer;
 function detectPlayer() {
     var testEl = document.createElement("video");
     if (testEl.canPlayType) {
-        if (testEl.canPlayType && testEl.canPlayType('video/mp4; codecs="avc1.42E01E"') && testEl.canPlayType('video/mp4; codecs="avc1.42E01E, mp4a.40.2"') && !(window.navigator.userAgent.indexOf('MSIE ') > -1) && !(window.navigator.userAgent.indexOf('Trident/') > -1)) {
+        if (testEl.canPlayType && testEl.canPlayType('video/mp4; codecs="avc1.42E01E"') && testEl.canPlayType('video/mp4; codecs="avc1.42E01E, mp4a.40.2"') && !(window.navigator.userAgent.indexOf('MSIE ') > -1) && !(window.navigator.userAgent.indexOf('Trident/') > -1) && !(window.navigator.userAgent.indexOf('SMART-TV/') > -1 && window.navigator.userAgent.indexOf('Kit/') > -1 && parseInt(window.navigator.userAgent.split('Kit/')[1].split('.')[0]) < 536)) {
             return true;
         }
     }
@@ -167,9 +167,9 @@ function drawFLASHPlayer(options) {
                 .offsetWidth / 16) * 9) + 'px';
         }
         document.getElementById(options.el).style.height = videodim;
-        swfobject.embedSWF(options.swfLib, options.el, document.getElementById(options.el).offsetWidth, document.getElementById(options.el).offsetHeight, "10.2", null, flashvars, params, attrs);
+        swfobject.embedSWF(options.swfLib, options.el, "100%", "100%", "10.2", null, flashvars, params, attrs);
     };
-    swfobject.embedSWF(options.swfLib, options.el, document.getElementById(options.el).offsetWidth, document.getElementById(options.el).offsetHeight, "10.2", null, flashvars, params, attrs);
+    swfobject.embedSWF(options.swfLib, options.el, "100%", "100%", "10.2", null, flashvars, params, attrs);
 }
 exports.drawFLASHPlayer = drawFLASHPlayer;
 function drawHLSPlayer(options) {
