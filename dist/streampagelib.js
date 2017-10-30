@@ -124,8 +124,8 @@ function drawFLASHPlayer(options) {
     var flashvars = {
         src: options.uri
     };
-    if (options.autoplay)
-        flashvars.autoPlay = true;
+    if (!options.autoplay)
+        flashvars.autoPlay = false;
     var params = {
         allowFullScreen: true,
         allowScriptAccess: "always",
