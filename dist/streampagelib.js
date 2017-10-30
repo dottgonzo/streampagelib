@@ -113,7 +113,7 @@ exports.SPlayer = SPlayer;
 function detectPlayer() {
     var testEl = document.createElement("video");
     if (testEl.canPlayType) {
-        if (testEl.canPlayType && testEl.canPlayType('video/mp4; codecs="avc1.42E01E"') && testEl.canPlayType('video/mp4; codecs="avc1.42E01E, mp4a.40.2"') && !(window.navigator.userAgent.indexOf('MSIE ') > -1) && !(window.navigator.userAgent.indexOf('Trident/') > -1) && !(window.navigator.userAgent.indexOf('SMART-TV/') > -1 && window.navigator.userAgent.indexOf('Kit/') > -1 && parseInt(window.navigator.userAgent.split('Kit/')[1].split('.')[0]) < 536)) {
+        if (testEl.canPlayType && testEl.canPlayType('video/mp4; codecs="avc1.42E01E"') && testEl.canPlayType('video/mp4; codecs="avc1.42E01E, mp4a.40.2"') && !(window.navigator.userAgent.indexOf('MSIE ') > -1) && !(window.navigator.userAgent.indexOf('Trident/') > -1) && !(window.navigator.userAgent.indexOf('SMART-TV') > -1 && window.navigator.userAgent.indexOf('Kit/') > -1 && parseInt(window.navigator.userAgent.split('Kit/')[1].split('.')[0]) < 536)) {
             return true;
         }
     }
